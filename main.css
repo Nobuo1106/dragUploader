@@ -1,0 +1,11 @@
+.preview img{
+    height: 50%;
+}
+
+.zoom{
+    display: flex;
+}
+
+.zoom div{
+    margin-right: 10px;
+}
