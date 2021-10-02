@@ -12,7 +12,7 @@ if($file_size > 2048576 || $file_err === 2) {
     array_push($err_msgs, 'ファイルサイズは1MB未満にして下さい。');
 }
 
-$allow_ext = array('jpg', 'jpeg', 'png');
+$allow_ext = array('jpg', 'jpeg', 'png', 'gif');
 $file_ext = pathinfo($filename, PATHINFO_EXTENSION);
 
 if(!in_array(strtolower($file_ext), $allow_ext)){

@@ -8,8 +8,8 @@
 <h1>画像アップロード</h1>
 <form action="./upload.php" method="post" enctype="multipart/form-data">
     <div id="drop-zone" style="border: 1px solid; padding: 30px;">
-        <p>ファイルをドラッグ＆ドロップもしくは</p>
-        <input type="file" name="file" id="file-input">
+        <p>ファイルをドラッグ＆ドロップもしくはファイルを選択ボタンをクリック</p>
+        <input type="file" name="file" id="file-input" accept="image/png, image/jpeg, mage/gif">
         <input type="hidden" name="MAX_FILE_SIZE" value="1038576">
     </div>
     <h2>アップロードした画像</h2>
@@ -45,9 +45,11 @@
     }, false);
 
     fileInput.addEventListener('change', function(e) {
-        previewFile(this.files[0]);
-        var size = this.files[0].size;
-        alert(size)
+        if(validateImage(this.files[0])){
+            previewFile(this.files[0]);
+        } else {
+            event.currentTarget.value = ''
+        } 
     });
 
     dropZone.addEventListener('drop', function(e) {
@@ -55,9 +57,13 @@
         e.preventDefault();
         this.style.background = '#ffffff'; //背景色を白に戻す
         var files = e.dataTransfer.files; //ドロップしたファイルを取得
-        if (files.length > 1) return alert('アップロードできるファイルは1つだけです。');
-        fileInput.files = files; //inputのvalueをドラッグしたファイルに置き換える。
-        previewFile(files[0]);
+        if(validateImage(files[0])){
+            if (files.length > 1) return alert('アップロードできるファイルは1つだけです。');
+            fileInput.files = files; //inputのvalueをドラッグしたファイルに置き換える。
+            previewFile(files[0]);
+        } else {
+            event.currentTarget.value = ''
+        }
     }, false);
 
     zoomOut.addEventListener('click', function(e) {
@@ -89,6 +95,24 @@
             preview.appendChild(img);
         };
     }
+
+    function validateImage(image) {
+        // check the type
+        var validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        if (validTypes.indexOf( image.type ) === -1) {
+            alert("無効なファイル形式です。");
+            return false;
+        }
+
+        // check the size
+        var maxSizeInBytes = 10e6; // 10MB
+        if (image.size > maxSizeInBytes) {
+            alert("ファイルの最大サイズは10MBです。");
+            return false;
+        }
+        return true;
+    }
+
 </script>
 </body>
 </html>
