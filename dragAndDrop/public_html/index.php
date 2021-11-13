@@ -29,29 +29,29 @@ $randum_str = md5(uniqid(rand(), true));
             <button>+</button>
         </div>
     </div>
-    <div>
-        <?php foreach ($files as $file): ?>
-            <img src="<?php echo "{$file['path']}"; ?>" alt="">
-        <?php endforeach; ?>
-    </div>
     <div class="container-fluid mx-0">
-        <div class="form-group row">
+        <div class="form-group row tooltip">
             <input class="border border-info rounded text-secondary form-control-plaintext col-10" id="copyTarget" type="text" value="おまけ" readonly>
             <button type="button" class="btn btn-info col" id="copy_btn" data-toggle="tooltip" data-placement="top" title="コピーする">
             <svg class="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24"><path d="M17,9H7V7H17M17,13H7V11H17M14,17H7V15H14M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z" /></svg>
             </button>
+            <div class="tooltiptext">
+                <span>コピーしました!</span>
+            </div>
         </div>
     </div>
     <br>
     <input type="submit" style="margin-top: 50px">
 </form>
+
 <script type="text/javascript">
     var dropZone = document.getElementById('drop-zone');
     var preview = document.getElementById('preview');
     var fileInput = document.getElementById('file-input');
     var zoomIn = document.getElementById('zoom-in');
     var zoomOut = document.getElementById('zoom-out');
-    
+    var copybtn = document.getElementById('copy_btn');
+
     dropZone.addEventListener('dragover', function(e) {
         e.stopPropagation();
         e.preventDefault();
@@ -72,11 +72,13 @@ $randum_str = md5(uniqid(rand(), true));
         } 
     });
 
-    function copyToClipboard() {
+    function copyFromClipboard() {
         var copyTarget = document.getElementById("copyTarget");
         copyTarget.select();
         document.execCommand("Copy");
     }
+
+    document.addEventListener('click', copyFromClipboard);
     
     dropZone.addEventListener('drop', function(e) {
         e.stopPropagation();
@@ -153,6 +155,19 @@ function getRndStr(){
   }
   return result;
 }
+var tooltip = document.querySelector('.tooltip')
+
+tooltip.addEventListener('click', function() {
+  if (this.classList.contains('active')) {
+    this.classList.remove('active');
+  } else {
+    this.classList.add('active');
+    setTimeout(function(){
+      this.classList.remove('active');
+    }.bind(this), 500);
+  } 
+});
+
 </script>
 </body>
 </html>

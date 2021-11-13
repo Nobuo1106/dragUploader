@@ -1,0 +1,70 @@
+<div class="tooltip">
+  <button>click</button>
+<div class="tooltiptext">
+  <span>Copied!</span>
+  </div>
+</div>
+
+<style>
+  .tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 100px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+.tooltip .tooltiptext::after {
+	position: absolute;
+	top: 40%;
+	right: 100%;
+	margin-left: -5px;
+  margin-top: -10px;
+	content: ' ';
+	border: 5px solid transparent;
+	border-right-color: #da3c41;
+}
+
+.tooltip.active .tooltiptext {
+  visibility: visible;
+}
+</style>
+<script>
+  var tooltip = document.querySelector('.tooltip')
+
+  tooltip.addEventListener('click', function() {
+    if (this.classList.contains('active')) {
+      this.classList.remove('active');
+    } else {
+      this.classList.add('active');
+      setTimeout(function(){
+        this.classList.remove('active');
+      }.bind(this), 500);
+    } 
+  });
+
+var tooltip = document.querySelector('.tooltip')
+
+tooltip.addEventListener('click', function() {
+  if (this.classList.contains('active')) {
+    this.classList.remove('active');
+  } else {
+    this.classList.add('active');
+    setTimeout(function(){
+      this.classList.remove('active');
+    }.bind(this), 500);
+  } 
+});
+</script>

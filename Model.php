@@ -29,4 +29,8 @@ class Model{
         $data = $stmt->fetchAll();
         return $data;
     }
+
+    function random($length) {
+	    return substr(str_shuffle('1234567890abcdefghijklmnopqrstuvwxyz'), 0, $length);
+    }
 }
