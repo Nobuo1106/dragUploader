@@ -1,6 +1,7 @@
 create table file (
-    id int(11) AUTO_INCREMENT NOT NULL, 
-    name varchar(255), 
-    path varchar(255),
+    id AUTO_INCREMENT(11) AUTO_INCREMENT NOT NULL, 
+    name VARCHAR(255),
+    org_name VARCHAR(255) UNIQUE,
+    path VARCHAR(255),
     PRIMARY KEY (id)
 );

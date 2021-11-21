@@ -16,7 +16,7 @@ $randum_str = md5(uniqid(rand(), true));
 <form action="./upload.php" method="post" enctype="multipart/form-data">
     <div id="drop-zone" style="border: 1px solid; padding: 30px;">
         <p>ファイルをドラッグ＆ドロップもしくはファイルを選択ボタンをクリック</p>
-        <input type="file" name="file" id="file-input" accept="image/png, image/jpeg, mage/gif">
+        <input type="file" name="image[]" id="file-input" accept="image/png, image/jpeg, mage/gif">
         <input type="hidden" name="MAX_FILE_SIZE" value="1038576">
     </div>
     <h2>アップロードした画像</h2>
