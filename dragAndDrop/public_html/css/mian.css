@@ -3,9 +3,9 @@
     display: inline-block;
     border-bottom: 1px dotted black;
     cursor: pointer;
-  }
-  
-  .tooltip .tooltiptext {
+}
+
+.tooltip .tooltiptext {
     visibility: hidden;
     width: 100px;
     background-color: black;
@@ -17,11 +17,16 @@
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
-  }
-  
-  .tooltip.active .tooltiptext {
+}
+
+.tooltip.active .tooltiptext {
     visibility: visible;
-  }
-input[type="text"],textarea {
-	width:10em;
+}
+
+input[type="text"], textarea {
+    width: 10em;
+}
+
+.prv-img {
+    width: 180px;
 }
